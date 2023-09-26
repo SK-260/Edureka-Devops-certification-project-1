@@ -25,7 +25,7 @@ pipeline {
     agent any 
     steps{
         git 'https://github.com/SK-260/Edureka-Devops-certification-project-1.git'
-        sshPublisher(publishers: [sshPublisherDesc(configName: 'Test Server', transfers: [
+        shPublisher(publishers: [sshPublisherDesc(configName: 'Test Server', transfers: [
             sshTransfer(
                 cleanRemote: false, 
                 excludes: '', 
