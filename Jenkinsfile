@@ -67,6 +67,7 @@ pipeline {
     }
    }
     stage("Delete Container"){
+        agent any
         when {
             expression {
                 currentBuild.result == 'FAILURE' ||
