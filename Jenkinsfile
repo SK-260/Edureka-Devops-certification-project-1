@@ -62,10 +62,15 @@ pipeline {
             )
         ], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
     }
-   
-    post {
-      unsuccessful {
-        sshPublisher(publishers: [sshPublisherDesc(configName: 'Test Server', transfers: [
+    stag("Delete Container"){
+        when {
+            expression {
+                currentBuild.currentResult == 'FAILURE' ||
+                currentBuild.currentResult == 'UNSTABLE'
+            }
+        }
+        steps{
+            sshPublisher(publishers: [sshPublisherDesc(configName: 'Test Server', transfers: [
             sshTransfer(
                 cleanRemote: false, 
                 excludes: '', 
@@ -84,8 +89,10 @@ pipeline {
                 sourceFiles: ''
             )
         ], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+        }
+
+        
     }
     }
     }
-}
 }
