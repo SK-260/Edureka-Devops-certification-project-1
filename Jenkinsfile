@@ -12,5 +12,16 @@ pipeline {
               sudo apt-get install puppet-agent -y'''
         }
     }
+   stage ('Docker installation'){
+     agent any
+     steps{
+        git 'https://github.com/SK-260/Edureka-Devops-certification-project-1.git'
+        dir('.') {
+          sh ' sudo ansible-playbook playbook.yaml -i inventory.txt'
+        }
+    }       
+   }
+  
+
   }
 }
