@@ -25,12 +25,15 @@ pipeline {
     agent any 
     steps{
         git 'https://github.com/SK-260/Edureka-Devops-certification-project-1.git'
-        shPublisher(publishers: [sshPublisherDesc(configName: 'Test Server', transfers: [
+        script {
+            error ( ' Intentional failure')
+        }
+        sshPublisher(publishers: [sshPublisherDesc(configName: 'Test Server', transfers: [
             sshTransfer(
                 cleanRemote: false, 
                 excludes: '', 
                 execCommand: '''
-                    cker container stop edureka_demo
+                    docker container stop edureka_demo
                     docker container rm -f edureka_demo
                     docker image rmi -f edureka_demo
                     cd /home/ubuntu/docker
