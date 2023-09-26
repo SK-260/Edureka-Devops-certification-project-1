@@ -25,9 +25,9 @@ pipeline {
     agent any 
     steps{
         git 'https://github.com/SK-260/Edureka-Devops-certification-project-1.git'
-        script {
-            error ( ' Intentional failure')
-        }
+        //script {
+        //    error ( ' Intentional failure')
+        //}
         sshPublisher(publishers: [sshPublisherDesc(configName: 'Test Server', transfers: [
             sshTransfer(
                 cleanRemote: false, 
