@@ -62,7 +62,8 @@ pipeline {
             )
         ], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
     }
-    stag("Delete Container"){
+   }
+    stage("Delete Container"){
         when {
             expression {
                 currentBuild.currentResult == 'FAILURE' ||
@@ -90,9 +91,7 @@ pipeline {
             )
         ], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
         }
-
-        
-    }
-    }
     }
 }
+}
+
