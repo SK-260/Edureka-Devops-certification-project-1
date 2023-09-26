@@ -62,7 +62,7 @@ pipeline {
             )
         ], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
     }
-   }
+   
     post {
       unsuccessful {
         sshPublisher(publishers: [sshPublisherDesc(configName: 'Test Server', transfers: [
@@ -87,4 +87,5 @@ pipeline {
     }
     }
     }
+}
 }
