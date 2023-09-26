@@ -69,8 +69,8 @@ pipeline {
     stage("Delete Container"){
         when {
             expression {
-                currentBuild.currentResult == 'FAILURE' ||
-                currentBuild.currentResult == 'UNSTABLE'
+                currentBuild.result == 'FAILURE' ||
+                currentBuild.result == 'UNSTABLE'
             }
         }
         steps{
