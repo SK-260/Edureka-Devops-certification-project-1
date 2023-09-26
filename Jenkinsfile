@@ -33,11 +33,11 @@ pipeline {
                 cleanRemote: false, 
                 excludes: '', 
                 execCommand: '''
-                    ocker container stop edureka_demo
-                    ocker container rm -f edureka_demo
-                    ocker image rmi -f edureka_demo
+                    docker container stop edureka_demo
+                    docker container rm -f edureka_demo
+                    docker image rmi -f edureka_demo
                     cd /home/ubuntu/docker
-                    ocker image build -t edureka_demo .
+                    docker image build -t edureka_demo .
                 ''',
                 execTimeout: 120000, 
                 flatten: false, 
@@ -52,7 +52,7 @@ pipeline {
             sshTransfer(
                 cleanRemote: false, 
                 excludes: '', 
-                execCommand: 'ocker container run -dit --name edureka_demo -p 80:80 edureka_demo', 
+                execCommand: 'docker container run -dit --name edureka_demo -p 80:80 edureka_demo', 
                 execTimeout: 120000, 
                 flatten: false, 
                 makeEmptyDirs: false, 
