@@ -30,7 +30,7 @@ pipeline {
                 cleanRemote: false, 
                 excludes: '', 
                 execCommand: '''
-                    ocker container stop edureka_demo
+                    cker container stop edureka_demo
                     docker container rm -f edureka_demo
                     docker image rmi -f edureka_demo
                     cd /home/ubuntu/docker
