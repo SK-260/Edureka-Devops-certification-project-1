@@ -25,18 +25,66 @@ pipeline {
     agent any 
     steps{
         git 'https://github.com/SK-260/Edureka-Devops-certification-project-1.git'
-        sshPublisher(publishers: [sshPublisherDesc(configName: 'Test Server', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '''docker container stop edureka_demo
-        docker container rm -f edureka_demo
-        docker image rmi -f edureka_demo
-        cd /home/ubuntu/docker
-        docker image build -t edureka_demo .''', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '/docker', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '**/*'), sshTransfer(cleanRemote: false, excludes: '', execCommand: 'docker container run -dit --name edureka_demo -p 80:80 edureka_demo', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+        sshPublisher(publishers: [sshPublisherDesc(configName: 'Test Server', transfers: [
+            sshTransfer(
+                cleanRemote: false, 
+                excludes: '', 
+                execCommand: '''
+                    ocker container stop edureka_demo
+                    docker container rm -f edureka_demo
+                    docker image rmi -f edureka_demo
+                    cd /home/ubuntu/docker
+                    docker image build -t edureka_demo .
+                ''',
+                execTimeout: 120000, 
+                flatten: false, 
+                makeEmptyDirs: false, 
+                noDefaultExcludes: false, 
+                patternSeparator: '[, ]+', 
+                remoteDirectory: '/docker', 
+                remoteDirectorySDF: false, 
+                removePrefix: '', 
+                sourceFiles: '**/*'
+            ),
+            sshTransfer(
+                cleanRemote: false, 
+                excludes: '', 
+                execCommand: 'docker container run -dit --name edureka_demo -p 80:80 edureka_demo', 
+                execTimeout: 120000, 
+                flatten: false, 
+                makeEmptyDirs: false, 
+                noDefaultExcludes: false, 
+                patternSeparator: '[, ]+', 
+                remoteDirectory: '', 
+                remoteDirectorySDF: false, 
+                removePrefix: '', 
+                sourceFiles: ''
+            )
+        ], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
     }
    }
     post {
       unsuccessful {
-        sshPublisher(publishers: [sshPublisherDesc(configName: 'Test Server', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '''docker container stop edureka_demo
-        docker container rm -f edureka_demo''', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
-      }
+        sshPublisher(publishers: [sshPublisherDesc(configName: 'Test Server', transfers: [
+            sshTransfer(
+                cleanRemote: false, 
+                excludes: '', 
+                execCommand: '''
+                    docker container stop edureka_demo
+                    docker container rm -f edureka_demo
+                ''', 
+                execTimeout: 120000, 
+                flatten: false, 
+                makeEmptyDirs: false, 
+                noDefaultExcludes: false, 
+                patternSeparator: '[, ]+', 
+                remoteDirectory: '', 
+                remoteDirectorySDF: false, 
+                removePrefix: '', 
+                sourceFiles: ''
+            )
+        ], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
     }
-   }
-  }
+    }
+    }
+}
